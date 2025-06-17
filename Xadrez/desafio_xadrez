@@ -1,0 +1,100 @@
+#include <stdio.h>
+
+//Movimento Torre com Recursividade - 5 casas para a direita;
+void moverTorre (int casas){
+        if (casas > 0){
+        printf("Direita\n");
+        moverTorre (casas - 1);
+    }
+}
+
+//Movimento do Bispo com Recursividade + Loops Aninhados - 5 casas na diagonal;
+void moverBispo (int casas){
+    if (casas <= 0){ // Caso Base.
+        return;
+    }
+    // Loops aninhados para o movimento do Bispo
+    for (int i = 0; i < 1; i++){ //Loop externo para a parte vertical do movimento diagonal
+        printf("Cima\n"); //Imprime o movimento "Cima"
+        for (int j = 0; j < 1; j++){ //Loop interno para a parte horizontal do movimento diagonal
+            printf("Direita\n"); //Imprime o movimento "Direita"
+        }
+
+    }
+    moverBispo (casas - 1); // Chama a função recursivamente com casas - 1
+}
+
+// Movimento da Rainha - 8 casas para a esquerda
+void moverRainha (int casas){
+    if (casas <= 0){ // Caso Base
+        return;
+    }
+
+    printf("Esquerda\n"); // Imprime o movimento "Esquerda"
+    moverRainha (casas - 1); // Chama a função recursivamente com casas - 1
+}
+
+//Movimento do Cavalo - "L", sendo 2 casas para cima e 1 para a direita - Loops Complexos
+void moverCavalo (int casas){
+    printf("---MOVIMENTO DO CAVALO---\n"); // Mensagem de início do movimento do Cavalo
+    printf("Cavalo executa 1 movimento em 'L', 2 casas para cima e 1 para a direita.\n");
+
+
+    const int MOVIMENTO_CAVALO_CIMA = 2; // Constante para o movimento do Cavalo para cima
+    const int MOVIMENTO_CAVALO_DIREITA = 1; // Constante para o movimento do Cavalo para a direita
+
+    int passosCima = 0; // Contador para o movimento do Cavalo para cima
+    int passosDireita = 0; // Contador para o movimento do Cavalo para a direita
+
+    //Loop externo para coordenar os passos do "L"
+    //Iteração por número de vezes que permita que imprimir todos os passos do "L"
+    for (int i = 0; i < MOVIMENTO_CAVALO_CIMA + MOVIMENTO_CAVALO_DIREITA; i++){
+        if (passosCima < MOVIMENTO_CAVALO_CIMA){
+            printf("Cima\n");
+            passosCima++; // Incrementa o contador de passos para cima
+        } else if (passosDireita < MOVIMENTO_CAVALO_DIREITA){
+            printf("Direita\n");
+            passosDireita++; // Incrementa o contador de passos para a direita
+        }
+
+        //Verificador para garantir que o Cavalo se moveu corretamente
+        if (passosCima == MOVIMENTO_CAVALO_CIMA && passosDireita == MOVIMENTO_CAVALO_DIREITA){
+            break; // Interrompe o loop se ambos os movimentos foram realizados
+        }
+    }
+    printf("Movimento do Cavalo Concluído!\n"); // Mensagem de conclusão do movimento do Cavalo
+    
+}
+
+
+//Função Principal - Inicia os movimentos. 
+int main (){
+    // ENTRADAS DE DADOS
+    int casasTorre = 5; // Número de casas que a Torre se move
+    int casasBispo = 5; // Número de casas que o Bispo se move
+    int casasRainha = 8; // Número de casas que a Rainha se move
+
+    printf("===SIMULAÇÃO DE MOVIMENTOS DE PEÇAS DE XADREZ===\n");
+
+    //Movimento da Torre
+    printf("---Movimento da Torre (%d casas)---\n", casasTorre);
+    moverTorre(casasTorre); // Chama a função para mover a Torre
+    printf("\n");
+
+    //Movimento do Bispo
+    printf("---Movimento do Bispo (%d casas)---\n", casasBispo);
+    moverBispo(casasBispo); // Chama a função para mover o Bispo
+    printf("\n");
+
+    //Movimento da Rainha
+    printf("---Movimento da Rainha (%d casas)---\n", casasRainha);
+    moverRainha (casasRainha); // Chama a função para mover a Rainha
+    printf("\n");
+
+    //Movimento do Cavalo
+    moverCavalo(1); // Chama a função para mover o Cavalo
+    printf("\n");
+
+    return 0; // Retorna 0 para indicar que o programa terminou com sucesso
+
+}
